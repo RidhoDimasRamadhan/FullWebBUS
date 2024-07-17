@@ -1,7 +1,3 @@
-// import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
-// import Profile from "./Layouts/User/profile.jsx";
-// import Beranda from "./Components/header/navbar.jsx";
-
 import Navbar from "../src/Components/header/navbar.jsx";
 import axios from "axios";
 axios.defaults.withCredentials = true;

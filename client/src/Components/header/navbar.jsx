@@ -15,8 +15,10 @@ import RootLayout from "../../Layouts/Root/RootLayout";
 import Registrasi from "/src/Layouts/User/registrasi_user.jsx";
 import Login from "/src/Layouts/User/loginUser.jsx";
 import Forgot from "/src/Layouts/User/lupa_password.jsx";
+import No_page from "/src/Layouts/User/No_page.jsx";
 
-
+// import Login_admin from "/src/Layouts/Admin/loginAdmin.jsx";
+// import Halaman_admin from "/src/Layouts/Admin/halaman_utama.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -29,6 +31,9 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="registrasi" element={<Registrasi />} />
       <Route path="lupaPassword" element={<Forgot />} />
+      {/* <Route path="admin" element={<Login_admin />} />
+      <Route path="dashbord_admin" element={<Halaman_admin />} /> */}
+      <Route path="*" element={<No_page />} />
     </Route>
   )
 );

@@ -19,9 +19,16 @@ function LOGIN() {
         email,
         password,
       });
-      setUser(data);
-      toast.success("Login Berhasil");
-      navigate("/");
+      if (data.role === "User") {
+        setUser(data);
+        toast.success("Login Berhasil");
+        navigate("/");
+      } else {
+        toast.error("Login Gagal");
+      }
+      //   setUser(data);
+      //   toast.success("Login Berhasil");
+      //   navigate("/");
     } catch (error) {
       toast.error("Login Gagal");
       //   alert("Login Gagal");

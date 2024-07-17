@@ -24,8 +24,8 @@ const Registrasi = () => {
     //   alert("Registrasi Berhasil");
       navigate("/login");
     } catch (error) {
-      alert("Registrasi Gagal");
-      //   toast.error("Registrasi Gagal");
+        toast.error("Registrasi Gagal");
+    //   alert("Registrasi Gagal");
     }
   }
 
