@@ -1,8 +1,24 @@
 body {
-  display: flex;
   width: 100%;
 }
 
-img{
-    width: 30rem;
+.upload_image{
+  width: 100%;
+  border: 5px solid red;
+    display: block;
+}
+
+.upload_image h1{
+  text-align: center;
+}
+
+.Form_upload_image{
+  margin-top: 3rem;
+  float: right;
+  margin-bottom: 3rem;
+}
+.table_img{
+  width: 80%;
+  margin: 0 auto;
+  border: 2px solid black;
 }

@@ -33,7 +33,7 @@ function data_user() {
           <Halaman_utama />
         </div>
 
-        <div className="home">
+        <div className="home w-100">
           {user?.role === "Admin" ? (
             <h1>fukk. {user?.username}</h1>
           ) : (

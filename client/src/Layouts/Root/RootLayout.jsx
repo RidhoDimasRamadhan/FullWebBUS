@@ -27,6 +27,9 @@ function RootLayout() {
     });
   }
   const { user } = useContext(Context);
+
+  // const cobak = user?.role === "admin";
+
   return (
     <>
       <Navbar
@@ -61,12 +64,17 @@ function RootLayout() {
                   Kontak
                 </NavLink>
               </Nav>
-              <h5>Haii, {user?.username}</h5>
+              <h5 className="me-2">Haii, {user?.username}</h5>
               <NavLink
-                style={{ backgroundColor: "red", marginLeft: "1rem" }}
-                className="navbarlink"
+                style={{ backgroundColor: "transparent" }}
+                // className="navbarlink"
               >
-                <button onClick={logout} type="submit" className="button">
+                <button
+                  style={{ borderRadius: "10px" }}
+                  onClick={logout}
+                  type="submit"
+                  className="btn btn-danger border-radius"
+                >
                   logout
                 </button>
               </NavLink>
@@ -108,42 +116,8 @@ function RootLayout() {
             </Navbar.Collapse>
           </Container>
         )}
-        {/* <Container>
-          <Navbar.Brand href="#home">
-            <img src={Gambar4} alt="Logo" className="logo" />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mx-auto">
-              <NavLink to="/" className="navbarlink">
-                Beranda
-              </NavLink>
-              <NavLink to="/profile" className="navbarlink">
-                Profile
-              </NavLink>
-              <NavLink to="/armada" className="navbarlink">
-                Armada
-              </NavLink>
-              <NavLink to="/galeri" className="navbarlink">
-                Galeri
-              </NavLink>
-              <NavLink to="/harga" className="navbarlink">
-                Harga
-              </NavLink>
-              <NavLink to="/kontak" className="navbarlink">
-                Kontak
-              </NavLink>
-            </Nav>
-            <h1>{user?.username}</h1>
-            <NavLink to="/login" className="navbarlink">
-              Login
-            </NavLink>
-            <NavLink to="/registrasi" className="navbarlink">
-              Registrasi
-            </NavLink>
-          </Navbar.Collapse>
-        </Container> */}
       </Navbar>
+
       <main>
         <Outlet />
       </main>

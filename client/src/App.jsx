@@ -4,6 +4,9 @@ axios.defaults.withCredentials = true;
 import { Toaster } from "react-hot-toast";
 
 import { UserContextProvider } from "/src/userContext.jsx";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+// import Navbar_admin from "../src/Components/header/navbar_admin.jsx";
+// import Login from "./Login_admin.jsx";
 
 function App() {
   return (
@@ -23,7 +26,8 @@ function App() {
       <div>
         <UserContextProvider>
           {<Navbar />}
-          <Toaster position="top-center" toastOptions={{ duration: 3000 }} />;
+          {/* {<Navbar_admin />} */}
+          <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
         </UserContextProvider>
       </div>
     </>

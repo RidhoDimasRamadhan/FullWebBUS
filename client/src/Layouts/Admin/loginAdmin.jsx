@@ -14,14 +14,14 @@ function Login_admin() {
   async function halaman_admin(e) {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:2000/login", {
+      const { data } = await axios.post("http://localhost:2000/loginAdmin", {
         email,
         password,
       });
       if (data.role === "Admin") {
         setUser(data);
         toast.success("Login Berhasil");
-        navigate("/halamanAdmin");
+        navigate("/admin/halamanAdmin");
       } else {
         toast.error("Login Gagal");
       }
@@ -32,8 +32,8 @@ function Login_admin() {
 
   return (
     <>
-      <div className="container ">
-        <div className="card loginAdmin">
+      <div className="container loginAdmin ">
+        <div className="card ">
           <div className="card-header text-center">
             <h3>Login Admin</h3>
           </div>
