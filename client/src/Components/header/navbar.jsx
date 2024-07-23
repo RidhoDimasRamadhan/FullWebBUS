@@ -29,6 +29,8 @@ import Halaman_admin from "/src/Layouts/Admin/halaman_utama.jsx";
 import Data_user from "/src/Layouts/Admin/data_user.jsx";
 import Galeri from "/src/Layouts/User/galeri.jsx";
 import Pemesanan from "/src/Layouts/Admin/order.jsx";
+
+import Pesanan from "/src/Layouts/User/pesanan.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -41,6 +43,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="registrasi" element={<Registrasi />} />
       <Route path="lupaPassword" element={<Forgot />} />
+      <Route path="pesan" element={<Pesanan />} />
       {/* <Route path="halamanAdmin" element={<Halaman_admin />} /> */}
       {/* <Route path="admin/data_user" element={<Data_user />} /> */}
       <Route path="*" element={<No_page />} />

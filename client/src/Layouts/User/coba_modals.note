@@ -1,0 +1,69 @@
+// src/App.js
+import React, { useState, useEffect } from "react";
+import Modal from "/src/Layouts/User/pesanan.jsx";
+// import "/src/css/modal1.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+const App = () => {
+  const [activeModal, setActiveModal] = useState(null);
+  const [modalData, setModalData] = useState(null);
+
+  const [gambar_bis, setgambar_bis] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:2000/armada")
+      .then((result) => setgambar_bis(result.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const fetchModalData = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:2000/detail_armada/${id}`);
+      const data = await response.json();
+      setModalData({ nama_bis: data.nama_bis, gambar_bis: data.gambar_bis });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const openModal = (id) => {
+    setActiveModal(id);
+    fetchModalData(id);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setModalData(null);
+  };
+
+  return (
+    <div className="App">
+      <h1>React Modal Template</h1>
+      {gambar_bis &&
+        gambar_bis.map((data) => (
+          <tr key={data._id}>
+            <td>
+              <Link onClick={() => openModal(data._id)} k>
+                <img
+                  src={data.gambar_bis} // {{ URL: data.gambar_bis }}
+                  // src={data.gambar_bis}
+                  className="galeri-img"
+                  alt="img"
+                />
+              </Link>
+            </td>
+          </tr>
+        ))}
+
+      <Modal
+        activeModal={activeModal}
+        closeModal={closeModal}
+        data={modalData}
+      />
+    </div>
+  );
+};
+
+export default App;
+

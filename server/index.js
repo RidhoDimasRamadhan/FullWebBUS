@@ -125,20 +125,6 @@ app.post("/loginAdmin", async (req, res) => {
   }
 });
 
-// app.get("/admin", (req, res) => {
-//   const { token } = req.cookies;
-//   if (token) {
-//     jwt.verify(token, secret, {}, async (err, userData) => {
-//       if (err) throw err;
-//       const { id, email, username } = await dataLogin.findById(userData.id);
-//       res.json({ id, email, username });
-//     });
-//   } else {
-//     res.json(null);
-//   }
-//   //   res.send("ini halaman utama");
-// });
-
 // CONTEX
 app.get("/", (req, res) => {
   const { token } = req.cookies;
@@ -151,6 +137,29 @@ app.get("/", (req, res) => {
   } else {
     res.json(null);
   }
+
+  // HALAMAN USER
+
+  // get image galeri page
+  app.get("/images", (req, res) => {
+    Photo.find({}).then((result) => res.send(result));
+  });
+
+  // get armada, armada page
+  app.get("/armada", (req, res) => {
+    Armada_db.find({}).then((result) => res.send(result));
+  });
+
+  // get id halaman Armada
+  app.get("/detail_armada/:id", (req, res) => {
+    const id = req.params.id;
+    Armada_db.findById({ _id: id })
+      .then((users) => res.json(users))
+      .catch((err) => res.json(err));
+  });
+
+
+
   //   res.send("ini halaman utama");
 });
 // app.get("/admin", (req, res) => {
@@ -198,14 +207,6 @@ app.post("/upload", upload.single("file"), (req, res) => {
     Photo: req.file.filename,
   });
   console.log(req.file);
-});
-
-// get image photo
-app.get("/images", (req, res) => {
-  Photo.find({}).then((result) => res.send(result));
-});
-app.get("/armada", (req, res) => {
-  Armada_db.find({}).then((result) => res.send(result));
 });
 
 // delete image ADMIN

@@ -6,38 +6,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import React from "react";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
+import { useParams } from "react-router-dom";
+import Modal from "/src/Layouts/User/pesanan.jsx";
 
 function Armada() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [activeModal, setActiveModal] = useState(null);
+  const [modalData, setModalData] = useState(null);
 
   const [gambar_bis, setgambar_bis] = useState([]);
 
@@ -48,6 +22,34 @@ function Armada() {
       .catch((err) => console.log(err));
   }, []);
 
+  const fetchModalData = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:2000/detail_armada/${id}`);
+      const data = await response.json();
+      setModalData({
+        nama_bis: data.nama_bis,
+        gambar_bis: data.gambar_bis,
+        tempat_duduk: data.tempat_duduk,
+        bahan_bakar: data.bahan_bakar,
+        wifi_youtube: data.wifi_youtube,
+        selimut_bantal: data.selimut_bantal,
+        ac: data.ac,
+        karaoke: data.karaoke,
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const openModal = (id) => {
+    setActiveModal(id);
+    fetchModalData(id);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setModalData(null);
+  };
   return (
     <>
       <Whatsapp />
@@ -69,7 +71,7 @@ function Armada() {
                     gambar_bis.map((data) => (
                       <tr key={data._id}>
                         <td>
-                          <Link onClick={() => setModalShow(true)} k>
+                          <Link onClick={() => openModal(data._id)} k>
                             <img
                               src={data.gambar_bis} // {{ URL: data.gambar_bis }}
                               // src={data.gambar_bis}
@@ -85,11 +87,12 @@ function Armada() {
             </div>
           </div>
         </div>
+        <Modal
+          activeModal={activeModal}
+          closeModal={closeModal}
+          data={modalData}
+        />
       </div>
-      <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
 
       <Kontak />
       <Footer />
