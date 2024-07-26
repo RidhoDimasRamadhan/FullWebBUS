@@ -50,7 +50,7 @@ export default function Armada() {
                 <thead>
                   <tr className="text-center">
                     <th>N0.</th>
-                    <th>Nama Armada</th>
+                    <th className="text-start">Nama Armada</th>
                     <th>Gambar Armada</th>
                     <th>Action</th>
                   </tr>
@@ -78,7 +78,10 @@ export default function Armada() {
                             Delete
                           </button>
                           <button className="btn btn-primary ms-1">
-                            <Link className="text-white text-decoration-none" to={`/admin/update_armada/${data._id}`}>
+                            <Link
+                              className="text-white text-decoration-none"
+                              to={`/admin/update_armada/${data._id}`}
+                            >
                               Update
                             </Link>
                           </button>

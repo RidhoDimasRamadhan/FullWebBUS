@@ -5,9 +5,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import React from "react";
-import Button from "react-bootstrap/Button";
-import { useParams } from "react-router-dom";
 import Modal from "/src/Layouts/User/pesanan.jsx";
+import "/src/css/halaman_galeri.css";
 
 function Armada() {
   const [activeModal, setActiveModal] = useState(null);
@@ -27,6 +26,7 @@ function Armada() {
       const response = await fetch(`http://localhost:2000/detail_armada/${id}`);
       const data = await response.json();
       setModalData({
+        _id: data._id,
         nama_bis: data.nama_bis,
         gambar_bis: data.gambar_bis,
         tempat_duduk: data.tempat_duduk,
@@ -65,25 +65,21 @@ function Armada() {
         <div className="container mt-5">
           <div className="gallery">
             <div className="gallery-item ">
-              <tr>
-                <td>
-                  {gambar_bis &&
-                    gambar_bis.map((data) => (
-                      <tr key={data._id}>
-                        <td>
-                          <Link onClick={() => openModal(data._id)} k>
-                            <img
-                              src={data.gambar_bis} // {{ URL: data.gambar_bis }}
-                              // src={data.gambar_bis}
-                              className="galeri-img"
-                              alt="img"
-                            />
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
-                </td>
-              </tr>
+              {gambar_bis &&
+                gambar_bis.map((data) => (
+                  <tr key={data._id}>
+                    <td>
+                      <Link onClick={() => openModal(data._id)} k>
+                        <img
+                          src={data.gambar_bis} // {{ URL: data.gambar_bis }}
+                          // src={data.gambar_bis}
+                          className="galeri-img"
+                          alt="img"
+                        />
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
             </div>
           </div>
         </div>

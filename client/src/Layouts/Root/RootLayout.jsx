@@ -60,11 +60,14 @@ function RootLayout() {
                 <NavLink to="/harga" className="navbarlink">
                   Harga
                 </NavLink>
+                <NavLink to="/hasil_order/:id" className="navbarlink">
+                  Pesanan
+                </NavLink>
                 <NavLink to="/kontak" className="navbarlink">
                   Kontak
                 </NavLink>
               </Nav>
-              <h5 className="me-2">Haii, {user?.username}</h5>
+              <h5 className="me-3 mt-1">Haii, {user?.username}</h5>
               <NavLink
                 style={{ backgroundColor: "transparent" }}
                 // className="navbarlink"

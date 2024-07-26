@@ -39,7 +39,7 @@ function Root_admin() {
         className="bg-body-tertiary "
         style={{ display: "block" }}
       >
-        {user ? <h1>fck</h1> : <h1>FUCK</h1>}
+        {/* {user ? <h1>fck</h1> : <h1>FUCK</h1>} */}
       </Navbar>
 
       <main>

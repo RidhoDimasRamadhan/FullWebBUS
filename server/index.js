@@ -22,6 +22,9 @@ const Photo = require("./models/db_images");
 //  armada db
 const Armada_db = require("./models/armada");
 
+// pesanan
+const Pesanan = require("./models/pesanan");
+
 mongoose.connect("mongodb://localhost:27017/Skripsi");
 
 const UserBcrypt = bcrypt.genSaltSync(10);
@@ -97,6 +100,7 @@ app.post("/login", async (req, res) => {
     res.status(422).json(e);
   }
 });
+
 app.post("/loginAdmin", async (req, res) => {
   const { email, password } = req.body;
 
@@ -125,7 +129,62 @@ app.post("/loginAdmin", async (req, res) => {
   }
 });
 
-// CONTEX
+// const verifyToken = (req, res, next) => {
+//   const token = req.header("auth-token");
+//   if (!token) return res.status(401).send("Access Denied");
+
+//   try {
+//     const verified = jwt.verify(token, secret);
+//     req.user = verified;
+//     next();
+//   } catch (err) {
+//     res.status(400).send("Invalid Token");
+//   }
+// };
+
+function getUserDataFromUser(req) {
+  const { token } = req.cookies;
+
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData);
+    });
+  });
+}
+
+app.get("/bookings", async (req, res) => {
+  const userData = await getUserDataFromUser(req);
+  res.json(
+    await Pesanan.find({ user_id: userData.id })
+      .populate("armada_id")
+      .populate("user_id")
+  );
+});
+
+// Halaman Pesan User
+app.post("/pesan_bus", async (req, res) => {
+  const userData = await getUserDataFromUser(req);
+  const {
+    armada_id,
+    // user_id,
+    nomor_telepon,
+    tanggal_berangkat,
+    tanggal_pulang,
+  } = req.body;
+  Pesanan.create({
+    // userId,
+    armada_id,
+    user_id: userData.id,
+    nomor_telepon,
+    tanggal_berangkat,
+    tanggal_pulang,
+  })
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
+// CONTEX USER
 app.get("/", (req, res) => {
   const { token } = req.cookies;
   if (token) {
@@ -157,8 +216,6 @@ app.get("/", (req, res) => {
       .then((users) => res.json(users))
       .catch((err) => res.json(err));
   });
-
-
 
   //   res.send("ini halaman utama");
 });
@@ -290,6 +347,25 @@ app.put("/update_armada_admin/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
+// Order
+app.put("/update_armada_admin/:id", (req, res) => {
+  const id = req.params.id;
+  Armada_db.findByIdAndUpdate(
+    { _id: id },
+    {
+      nama_bis: req.body.nama_bis,
+      gambar_bis: req.body.gambar_bis,
+      tempat_duduk: req.body.tempat_duduk,
+      bahan_bakar: req.body.bahan_bakar,
+      wifi_youtube: req.body.wifi_youtube,
+      selimut_bantal: req.body.selimut_bantal,
+      ac: req.body.ac,
+      karaoke: req.body.karaoke,
+    }
+  )
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
 app.listen(2000, () => {
   console.log("Server running on port 2000");
 });
