@@ -7,6 +7,10 @@ const userScheemaa = new mongoose.Schema({
     unique: true,
   },
   password: String,
+  role: {
+    type: String,
+    default: "Admin",
+  },
 });
 
 const adminLogin = mongoose.model("admin", userScheemaa);

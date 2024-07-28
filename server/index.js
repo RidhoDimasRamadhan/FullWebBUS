@@ -25,6 +25,9 @@ const Armada_db = require("./models/armada");
 // pesanan
 const Pesanan = require("./models/pesanan");
 
+// admin
+const Admin = require("./models/admin");
+
 mongoose.connect("mongodb://localhost:27017/Skripsi");
 
 const UserBcrypt = bcrypt.genSaltSync(10);
@@ -105,7 +108,7 @@ app.post("/loginAdmin", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const User = await dataLogin.findOne({ email });
+    const User = await Admin.findOne({ email });
     if (User) {
       const pass = bcrypt.compareSync(password, User.password);
       if (pass) {
@@ -142,6 +145,7 @@ app.post("/loginAdmin", async (req, res) => {
 //   }
 // };
 
+// get Order in User Page
 function getUserDataFromUser(req) {
   const { token } = req.cookies;
 
@@ -153,6 +157,7 @@ function getUserDataFromUser(req) {
   });
 }
 
+// get Order in User Page
 app.get("/bookings", async (req, res) => {
   const userData = await getUserDataFromUser(req);
   res.json(
@@ -160,6 +165,28 @@ app.get("/bookings", async (req, res) => {
       .populate("armada_id")
       .populate("user_id")
   );
+});
+
+// get all data from admin
+app.get("/bookingsAdmin", (req, res) => {
+  Pesanan.find({})
+    .populate("armada_id")
+    .populate("user_id")
+    .then((result) => res.json(result))
+    .catch((err) => res.json(err));
+});
+
+// get update confirmed
+app.put("/confirmed/:id", (req, res) => {
+  const id = req.params.id;
+  Pesanan.findByIdAndUpdate(
+    { _id: id },
+    {
+      order: req.body.order,
+    }
+  )
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
 });
 
 // Halaman Pesan User
@@ -184,6 +211,20 @@ app.post("/pesan_bus", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
+// Context Admin
+app.get("/admin/", (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, secret, {}, async (err, userAdmin) => {
+      if (err) throw err;
+      const { id, email, username } = await Admin.findById(userAdmin.id);
+      res.json({ id, email, username });
+    });
+  } else {
+    res.json(null);
+  }
+});
+
 // CONTEX USER
 app.get("/", (req, res) => {
   const { token } = req.cookies;
@@ -197,28 +238,47 @@ app.get("/", (req, res) => {
     res.json(null);
   }
 
-  // HALAMAN USER
-
-  // get image galeri page
-  app.get("/images", (req, res) => {
-    Photo.find({}).then((result) => res.send(result));
-  });
-
-  // get armada, armada page
-  app.get("/armada", (req, res) => {
-    Armada_db.find({}).then((result) => res.send(result));
-  });
-
-  // get id halaman Armada
-  app.get("/detail_armada/:id", (req, res) => {
-    const id = req.params.id;
-    Armada_db.findById({ _id: id })
-      .then((users) => res.json(users))
-      .catch((err) => res.json(err));
-  });
-
   //   res.send("ini halaman utama");
 });
+
+// HALAMAN USER
+// get image galeri page
+app.get("/images", (req, res) => {
+  Photo.find({}).then((result) => res.send(result));
+});
+
+// get armada, armada page
+app.get("/armada", (req, res) => {
+  Armada_db.find({}).then((result) => res.send(result));
+});
+
+// get id halaman Armada
+app.get("/detail_armada/:id", (req, res) => {
+  const id = req.params.id;
+  Armada_db.findById({ _id: id })
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
+app.get("/detail_armada_admin/:id", (req, res) => {
+  const id = req.params.id;
+  Pesanan.findById({ _id: id })
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
+
+// update id order admin
+app.put("/update_order_admin/:id", (req, res) => {
+  const id = req.params.id;
+  Pesanan.findByIdAndUpdate(
+    { _id: id },
+    {
+      order: req.body.Order,
+    }
+  )
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
+
 // app.get("/admin", (req, res) => {
 //   const { token } = req.cookies;
 //   if (token) {
@@ -366,6 +426,7 @@ app.put("/update_armada_admin/:id", (req, res) => {
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
 });
+
 app.listen(2000, () => {
   console.log("Server running on port 2000");
 });

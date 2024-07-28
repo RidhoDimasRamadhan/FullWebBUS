@@ -34,7 +34,7 @@ function Riwayat() {
                 </h6>
                 <h6>Tanggal Berangkat : {data.tanggal_berangkat}</h6>
                 <h6>Tanggal Selesai : {data.tanggal_berangkat}</h6>
-                <h6>Status : {data.status ? "Confirmedr" : "Not Confirmed"}</h6>
+                <h6>Status : {data.order === "true" ? "Confirmed" : "Not Confirmed"}</h6>
               </div>
             </div>
           </>

@@ -9,13 +9,15 @@ import React, { useContext, useState } from "react";
 import "/src/css/modal2.css";
 
 // import { Link } from "react-router-dom";
-// import { Context } from "/src/userContext";
+import { Context } from "/src/userContext";
+
+import { Link } from "react-router-dom";
 
 import Danger from "../../Components/buttonWA/danger";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const Modal = ({ activeModal, closeModal, data }) => {
-  // const { user } = useContext(Context);
+  const { user } = useContext(Context);
 
   const navigate = useNavigate();
   const [nomor_telepon, setNomor_telepon] = useState();
@@ -35,7 +37,7 @@ const Modal = ({ activeModal, closeModal, data }) => {
       armada_id: data._id,
       nomor_telepon: nomor_telepon,
       tanggal_berangkat: tanggal_mulai,
-      tanggal_pulang: tanggal_selesai,  
+      tanggal_pulang: tanggal_selesai,
     });
     const bookingId = response.data._id;
     navigate(`/hasil_order/${bookingId}`);

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { Context } from "/src/userContext.jsx";
+import { Admin } from "/src/userAdmin.jsx";
 import axios from "axios";
 
 import React from "react";
@@ -9,16 +9,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import "/src/css/halaman_admin.css";
 
-import { useLocation } from "react-router-dom";
-
 // import Data_user from "/src/Layouts/Admin/data_user.jsx";
 function halaman_admin() {
-  const { user, ready } = useContext(Context);
+  // const { user, ready } = useContext(Admin);
   const navigate = useNavigate();
 
-  if (!ready) {
-    return "loading ..";
-  }
+  // if (!ready) {
+  //   return "loading ..";
+  // }
   async function logout() {
     axios.post("http://localhost:2000/logout").then(() => {
       localStorage.removeItem("token");
@@ -35,8 +33,10 @@ function halaman_admin() {
       <div className="d-flex flex-column bg-dark text-white p-4 jusify-content-between ">
         <a className="d-flex align-items-center text-white text-decoration-none">
           <i className="fs-5 "></i>
-          <span className="fs-5 ms-2  ">Welcome, {user?.role}</span>
+          {/* <span className="fs-5 ms-2  ">Welcome, {user?.role}</span> */}
         </a>
+
+        {/* <h1>hii, {user.username}</h1> */}
         <hr className="text-secondary mt-3" />
         <ul className="nav nav-pills flex-column p-0 m-0">
           <li className="nav-item p-1">

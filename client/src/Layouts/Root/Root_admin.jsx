@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-import { Context } from "/src/userContext";
+// import { Admin } from "/src/userAdmin";
 import { useContext } from "react";
 
 import axios from "axios";
@@ -26,7 +26,7 @@ function Root_admin() {
   //       navigate("/");
   //     });
   //   }
-  const { user } = useContext(Context);
+  // const { user } = useContext(Admin);
 
   // const cobak = user?.role === "admin";
 

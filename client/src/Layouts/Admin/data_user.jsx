@@ -1,13 +1,13 @@
 import "/src/css/data_user.css";
 import { useContext, useState, useEffect } from "react";
-import { Context } from "/src/userContext";
+import { Admin } from "/src/userAdmin";
 import axios from "axios";
 
 import React from "react";
 import Halaman_utama from "/src/Layouts/Admin/halaman_utama.jsx";
 
 function data_user() {
-  const { user } = useContext(Context);
+  // const { user } = useContext(Admin);
   const [dataSiswa, setData] = useState([]);
 
   useEffect(() => {
@@ -34,12 +34,12 @@ function data_user() {
         </div>
 
         <div className="home w-100">
-          {user?.role === "Admin" ? (
+          {/* {user?.role === "Admin" ? (
             <h1>fukk. {user?.username}</h1>
           ) : (
             <h1>hii. {user?.username}</h1>
           )}
-          <h1>hii. {user?.username}</h1>
+          <h1>hii. {user?.username}</h1> */}
           <h1>ini adalah halaman user</h1>
 
           <table className="table">

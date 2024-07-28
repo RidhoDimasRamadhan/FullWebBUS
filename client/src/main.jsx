@@ -5,7 +5,7 @@ import App from "./App.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 ReactDOM.createRoot(document.getElementById("user")).render(
-  <React.StrictMode >
+  <React.StrictMode>
     <App />
     {/* <Login /> */}
   </React.StrictMode>

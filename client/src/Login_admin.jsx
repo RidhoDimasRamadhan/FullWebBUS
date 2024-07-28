@@ -1,6 +1,6 @@
 import Navbar_admin from "../src/Components/header/navbar_admin.jsx";
+import { AdminContextProvider } from "/src/userAdmin.jsx";
 import axios from "axios";
-import { UserContextProvider } from "/src/userContext.jsx";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -17,10 +17,10 @@ function ADMIN() {
   return (
     <>
       <div>
-        <UserContextProvider>
+        <AdminContextProvider>
           {<Navbar_admin />}
           <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
-        </UserContextProvider>
+        </AdminContextProvider>
         {/* <UserContextProvider>
           <BrowserRouter>
             <Toaster position="top-center" toastOptions={{ duration: 3000 }} />

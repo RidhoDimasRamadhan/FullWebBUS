@@ -2,31 +2,33 @@ import React from "react";
 import axios from "axios";
 import { useState, useContext } from "react";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { Context } from "/src/userContext";
+import { useNavigate, useParams } from "react-router-dom";
+import { Admin } from "/src/userAdmin";
 import "/src/css/login_admin.css";
 
 function Login_admin() {
+  // const { id } = useParams();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
-  const { setUser } = useContext(Context);
+  const { setAdmin } = useContext(Admin);
   async function halaman_admin(e) {
     e.preventDefault();
     try {
       const { data } = await axios.post("http://localhost:2000/loginAdmin", {
+        // id,
         email,
         password,
       });
-      if (data.role === "Admin") {
-        setUser(data);
-        toast.success("Login Berhasil");
-        navigate("/admin/halamanAdmin");
-      } else {
-        toast.error("Login Gagal");
-      }
+      setAdmin(data);
+      toast.success("Login Berhasil");
+      navigate("/admin/halamanAdmin");
+      //   setUser(data);
+      //   toast.success("Login Berhasil");
+      //   navigate("/");
     } catch (error) {
       toast.error("Login Gagal");
+      //   alert("Login Gagal");
     }
   }
 
