@@ -1,10 +1,10 @@
 import "/src/css/data_user.css";
 import { useContext, useState, useEffect } from "react";
-import { Admin } from "/src/userAdmin";
 import axios from "axios";
 
 import React from "react";
 import Halaman_utama from "/src/Layouts/Admin/halaman_utama.jsx";
+import "/src/css/halaman_admin.css";
 
 function data_user() {
   // const { user } = useContext(Admin);
@@ -17,15 +17,6 @@ function data_user() {
       .catch((err) => console.log(err));
   }, []);
 
-  //   const hapus = (id) => {
-  //     axios
-  //       .delete("http://localhost:3001/delete/" + id)
-  //       .then((result) => {
-  //         console.log(result);
-  //         window.location.reload();
-  //       })
-  //       .catch((errr) => console.log(errr));
-  //   };
   return (
     <body>
       <div className="d-flex">
@@ -34,52 +25,49 @@ function data_user() {
         </div>
 
         <div className="home w-100">
-          {/* {user?.role === "Admin" ? (
-            <h1>fukk. {user?.username}</h1>
-          ) : (
-            <h1>hii. {user?.username}</h1>
-          )}
-          <h1>hii. {user?.username}</h1> */}
-          <h1>ini adalah halaman user</h1>
+          <h1 className="text-center mt-3">Halaman User</h1>
 
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Nama</th>
-                <th>Kelas</th>
-                <th>NPM</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {dataSiswa.map((identitas) => {
-                return (
-                  <tr key={identitas._id}>
-                    <td>{identitas.username}</td>
-                    <td>{identitas.email}</td>
-                    {/* <td>{identitas.npm}</td> */}
-                    <td>
-                      {/* <Link
-                      to={`/update/${identitas._id}`}
-                      className="btn btn-success"
-                    >
-                      Update
-                    </Link> */}
-                    </td>
-                    <td>
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => hapus(identitas._id)}
-                      >
-                        Delete
-                      </button>
-                    </td>
+          <div className="container mt-4">
+            <div className="table-responsive">
+              <table className="table table-bordered table-hover">
+                <thead className="thead-dark">
+                  <tr className="text-center">
+                    <th style={{ backgroundColor: "black", color: "white" }}>
+                      No
+                    </th>
+                    <th style={{ backgroundColor: "black", color: "white" }}>
+                      Nama
+                    </th>
+                    <th style={{ backgroundColor: "black", color: "white" }}>
+                      Email
+                    </th>
+                    <th style={{ backgroundColor: "black", color: "white" }}>
+                      Action
+                    </th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                  {dataSiswa.map((identitas, data) => {
+                    return (
+                      <tr key={identitas._id}>
+                        <td>{data + 1}</td>
+                        <td>{identitas.username}</td>
+                        <td>{identitas.email}</td>
+                        <td className="text-center">
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => hapus(identitas._id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </body>

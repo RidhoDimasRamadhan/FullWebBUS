@@ -51,25 +51,23 @@ function galeri_admin() {
           <Halaman_utama />
         </div>
 
-        <div className="upload_image">
-          <h1>Upload Image</h1>
+        <div className="w-100 galeri">
+          <h1 className="text-center mt-3">UPLOAD GAMBAR</h1>
           <form className="Form_upload_image">
             <input
               type="file"
               onChange={(e) => setFile(e.target.files[0])}
-              // value={value}
             />
             <button onClick={handle_upload}>Upload</button>
           </form>
-
-          <div className="table_img">
-            <br />
-            <table className="table table-responsive">
-              <thead>
-                <tr className="table-dark text-center">
-                  <th>No</th>
-                  <th>Gambar</th>
-                  <th>Action</th>
+          <div className="container mt-4">
+            <div className="table_gambar">
+              <table className="table table-bordered table-hover">
+                <thead className="thead-dark">
+                  <tr className="text-center">
+                  <th style={{ backgroundColor: "black", color: "white" }}>No.</th>
+                  <th style={{ backgroundColor: "black", color: "white" }}>Gambar</th>
+                  <th style={{ backgroundColor: "black", color: "white" }}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -100,6 +98,7 @@ function galeri_admin() {
               </tbody>
             </table>
           </div>
+        </div>
         </div>
       </div>
     </>

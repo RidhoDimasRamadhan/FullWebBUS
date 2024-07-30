@@ -34,7 +34,7 @@ const Create = () => {
       .then((result) => {
         console.log(result);
         alert("Data Berhasil Terupdate");
-        Navigate("/admin/armada");
+        Navigate("/admin/pemesanan");
       })
       .catch((err) => console.log(err));
   };
@@ -42,23 +42,32 @@ const Create = () => {
     <>
       <div>
         <form onSubmit={Update} className="ms-5 me-5 mt-5">
-          <h2>Edit Armada</h2>
+          <h2>Halaman Konfirmasi Pesanan</h2>
+
           <div className="mb-3">
-            <label className="form-label">Nama Bis</label>
-            <input
-              type="text"
-              placeholder="Masukkan nama Bis disini"
+            <label className="form-label">Status Konfirmasi</label>
+            <select
               className="form-control"
               value={Order}
               onChange={(e) => setOrder(e.target.value)}
-            />
+            >
+              <option value="">Selet Option</option>
+              <option value="true">Confirmed</option>
+              <option value="false">NOT CONFIRMED</option>
+            </select>
           </div>
 
+          <button className="btn btn-danger me-2">
+            <Link
+              to={"/admin/pemesanan"}
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Cancel
+            </Link>
+          </button>
           <button className="btn btn-success"> Submit</button>
         </form>
       </div>
-      <Link to={"/admin/armada"}>back</Link>
-      {/* <button>back</button> */}
     </>
   );
 };

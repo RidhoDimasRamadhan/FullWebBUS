@@ -19,11 +19,13 @@ function RootLayout() {
   async function logout() {
     axios.post("http://localhost:2000/logout").then(() => {
       localStorage.removeItem("token");
+      toast.success("Logout Berhasil",{
+        duration: 1000,
+      });
+      navigate("/");
       setTimeout(function () {
         location.reload();
-      }, 1000);
-      toast.success("Logout Berhasil");
-      navigate("/");
+      }, 500);
     });
   }
   const { user } = useContext(Context);

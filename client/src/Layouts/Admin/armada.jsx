@@ -35,65 +35,70 @@ export default function Armada() {
           <Halaman_utama />
         </div>
 
-        <div className="armada_Admin">
-          <h1>HALAMAN Armada</h1>
-          <div className="bg-white rounded w-50 p-2">
+            <div className="armada_Admin w-100">
+          <h1 className="text-center mt-3">HALAMAN ARMADA</h1>
+          <div className="add ms-4">
+
             <Link
               to="/admin/create_armada"
               className="btn btn-success me-2 mt-5"
-            >
-              Add Armada
+              >
+              Add Armada +
             </Link>
+              </div>
 
-            <div className="table_armada">
-              <table className="table table-responsive">
-                <thead>
-                  <tr className="text-center">
-                    <th>N0.</th>
-                    <th className="text-start">Nama Armada</th>
-                    <th>Gambar Armada</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {DataArmada &&
-                    DataArmada.map((data, index) => (
-                      <tr key={data._id}>
-                        <td>{index + 1}</td>
-                        <td>{data.nama_bis}</td>
-                        <td>
-                          <img
-                            src={data.gambar_bis} // {{ URL: data.gambar_bis }}
-                            // src={data.gambar_bis}
-                            className="rounded"
-                            alt=""
-                            style={{ width: "200px", height: "150px" }}
-                          />
-                        </td>
-                        <td>
-                          <button
-                            className="btn btn-danger"
-                            onClick={() => hapus(data._id)}
-                          >
-                            Delete
-                          </button>
-                          <button className="btn btn-primary ms-1">
-                            <Link
-                              className="text-white text-decoration-none"
-                              to={`/admin/update_armada/${data._id}`}
-                            >
-                              Update
-                            </Link>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <div className="container mt-4 ">
+                <div className="bg-white rounded ">
+                  <div className="table-responsive">
+                    <table className="table table-bordered table-hover">
+                      <thead className="text-center">
+                        <tr className="text-center">
+                          <th style={{ backgroundColor: "black", color: "white" }}>No.</th>
+                          <th style={{ backgroundColor: "black", color: "white" }} >Nama Armada</th>
+                          <th style={{ backgroundColor: "black", color: "white" }}>Gambar Armada</th>
+                          <th style={{ backgroundColor: "black", color: "white" }}>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {DataArmada &&
+                          DataArmada.map((data, index) => (
+                            <tr key={data._id}>
+                              <td className="text-center">{index + 1}</td>
+                              <td>{data.nama_bis}</td>
+                              <td className="text-center">
+                                <img
+                                  src={data.gambar_bis} // {{ URL: data.gambar_bis }}
+                                  // src={data.gambar_bis}
+                                  className="rounded"
+                                  alt=""
+                                  style={{ width: "200px", height: "150px" }}
+                                />
+                              </td>
+                              <td className="text-center">
+                                <button
+                                  className="btn btn-danger"
+                                  onClick={() => hapus(data._id)}
+                                >
+                                  Delete
+                                </button>
+                                <button className="btn btn-primary ms-1">
+                                  <Link
+                                    className="text-white text-decoration-none"
+                                    to={`/admin/update_armada/${data._id}`}
+                                  >
+                                    Update
+                                  </Link>
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
     </>
   );
 }

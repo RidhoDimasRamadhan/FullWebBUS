@@ -2,23 +2,38 @@ body {
   width: 100%;
 }
 
-.upload_image{
+.upload_image {
   width: 100%;
-  border: 5px solid red;
-    display: block;
+  /* border: 5px solid red; */
+  display: block;
 }
 
-.upload_image h1{
+.upload_image h1 {
   text-align: center;
 }
 
-.Form_upload_image{
+.Form_upload_image {
   margin-top: 3rem;
-  float: right;
   margin-bottom: 3rem;
+  margin-left: 2.5rem;
 }
-.table_img{
+.table_img {
   width: 80%;
   margin: 0 auto;
-  border: 2px solid black;
+  /* border: 2px solid black; */
+}
+
+.table-responsive {
+  max-height: 45rem; /* Set the max height as per your requirement */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.galeri{
+  position: relative;
+  display: inline;
+}
+
+.table_gambar{
+  max-height: 37rem; /* Set the max height as per your requirement */
+  overflow-y: auto; 
 }

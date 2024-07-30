@@ -68,7 +68,7 @@ function Armada() {
               {gambar_bis &&
                 gambar_bis.map((data) => (
                   <tr key={data._id}>
-                    <td>
+                    <td className="galeri">
                       <Link onClick={() => openModal(data._id)} k>
                         <img
                           src={data.gambar_bis} // {{ URL: data.gambar_bis }}
@@ -76,6 +76,9 @@ function Armada() {
                           className="galeri-img"
                           alt="img"
                         />
+                      <div className="text-overlay">Detail Bus <br />
+                      & <br />
+                      Pesan Sekarang</div>
                       </Link>
                     </td>
                   </tr>

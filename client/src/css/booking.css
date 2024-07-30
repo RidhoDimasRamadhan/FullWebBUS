@@ -1,0 +1,29 @@
+
+
+.booking2{
+    display: flex;
+    /* border: 2px solid red   ; */
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+.kanan{
+    margin-left: 1rem;
+    /* border: 2px solid black; */
+    text-wrap: 100px;
+}
+.kanan h6{
+    margin-bottom: 1rem;
+}
+.kalimat{
+    color: black;
+    margin: 1rem 0;
+}
+.batal button{
+    color: white;
+    font-weight: bolder;
+}
+
+span .order{
+    font-weight: bolder;
+    color: black;
+}

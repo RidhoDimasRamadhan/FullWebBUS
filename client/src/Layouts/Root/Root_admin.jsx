@@ -34,13 +34,12 @@ function Root_admin() {
     <>
       {/* {user?.role === "Admin" ? (} */}
 
-      <Navbar
+      {/* <Navbar
         expand="lg"
         className="bg-body-tertiary "
         style={{ display: "block" }}
       >
-        {/* {user ? <h1>fck</h1> : <h1>FUCK</h1>} */}
-      </Navbar>
+      </Navbar> */}
 
       <main>
         <Outlet />

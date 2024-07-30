@@ -141,7 +141,7 @@ const Create = () => {
             <input
               type="file"
               //   onChange={(e) => setgambar_bis(e.target.value)}
-            //   onChange={(e) => handleFileChange(e)}
+              //   onChange={(e) => handleFileChange(e)}
               onChange={handleFileChange}
               accept="image/*"
               // value={value}
@@ -215,11 +215,17 @@ const Create = () => {
             </select>
           </div>
 
+          <button className="btn btn-danger me-2">
+            <Link
+              to={"/admin/armada"}
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Cancel
+            </Link>
+          </button>
           <button className="btn btn-success"> Submit</button>
         </form>
       </div>
-      <Link to={"/admin/armada"}>back</Link>
-      {/* <button>back</button> */}
     </>
   );
 };

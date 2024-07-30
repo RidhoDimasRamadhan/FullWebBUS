@@ -10,6 +10,7 @@ import "/src/css/modal2.css";
 
 // import { Link } from "react-router-dom";
 import { Context } from "/src/userContext";
+import { toast } from "react-hot-toast";
 
 import { Link } from "react-router-dom";
 
@@ -40,6 +41,9 @@ const Modal = ({ activeModal, closeModal, data }) => {
       tanggal_pulang: tanggal_selesai,
     });
     const bookingId = response.data._id;
+    toast.success("Armada Bus Berhasil Dipesan", {
+      duration: 2000,
+    });
     navigate(`/hasil_order/${bookingId}`);
   }
 
@@ -53,7 +57,7 @@ const Modal = ({ activeModal, closeModal, data }) => {
           <>
             <div
               className="row justify-content-center xl-12"
-              style={{ marginTop: "30px" }}
+              style={{ marginTop: "10px" }}
             >
               <div className="col-6 gambar">
                 <div className="col-12 gambar_utama">
@@ -172,87 +176,97 @@ const Modal = ({ activeModal, closeModal, data }) => {
                   </div>
                 </div>
 
-                <div className="row form-control mt-2">
-                  <div className="col-12">
-                    <label htmlFor="" className="Label ">
-                      Nomor Telepon
-                    </label>{" "}
-                    <br />
-                    <input
-                      type="number"
-                      value={nomor_telepon}
-                      onChange={(e) => setNomor_telepon(e.target.value)}
-                      placeholder="Masukkan nomor telepon"
-                      className="form-control"
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label htmlFor="" className="Label">
-                      TanggaL Mulai Perjalanan
-                    </label>{" "}
-                    <br />
-                    <input
-                      type="date"
-                      className="form-control"
-                      value={tanggal_mulai}
-                      onChange={(e) => setTanggal_mulai(e.target.value)}
-                    />
-                  </div>
-                  <div className="col-12">
-                    <label htmlFor="" className="Label">
-                      TanggaL Akhir Perjalanan
-                    </label>{" "}
-                    <br />
-                    <input
-                      type="date"
-                      className="form-control"
-                      value={tanggal_selesai}
-                      onChange={(e) => setTanggal_selesai(e.target.value)}
-                    />
-                  </div>
-
-                  <div className="col-12 ketentuan">
-                    <i>{<Danger />}</i>
-                    <p>Syarat & Ketentuan Pesan Bus</p>
-                    <br />
-                  </div>
-                  <div className="syarat">
-                    <ol>
-                      <li>
-                        Jika melakukan pembatalan pesanan, maksimal 5 hari
-                        sebelum tanggal berangkat.
-                      </li>
-                      <li>
-                        Jika melakukan pembatalan pesanan, melewati 5 hari
-                        sebelum tanggal berangkat maka akan dikenakan CHARGE
-                        yaitu uang akan dikembalikan 50% (Uang Muka){" "}
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-
-                <div className="row form-control">
-                  <div className="row">
+                <form onSubmit={Order}>
+                  <div className="row form-control mt-2 border">
                     <div className="col-12">
-                      <div className="container ">
-                        <div className="row pesanModal">
-                          {user ? (
-                            // <Link to={"/registrasi"}>
+                      <label htmlFor="" className="Label ">
+                        Nomor Telepon
+                      </label>{" "}
+                      <br />
+                      <input
+                        type="number"
+                        value={nomor_telepon}
+                        onChange={(e) => setNomor_telepon(e.target.value)}
+                        placeholder="Masukkan nomor telepon"
+                        className="form-control"
+                        required
+                      />
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="" className="Label">
+                        TanggaL Mulai Perjalanan
+                      </label>{" "}
+                      <br />
+                      <input
+                        type="date"
+                        className="form-control"
+                        value={tanggal_mulai}
+                        onChange={(e) => setTanggal_mulai(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="" className="Label">
+                        TanggaL Akhir Perjalanan
+                      </label>{" "}
+                      <br />
+                      <input
+                        type="date"
+                        className="form-control"
+                        value={tanggal_selesai}
+                        onChange={(e) => setTanggal_selesai(e.target.value)}
+                        required
+                      />
+                    </div>
 
-                            <div className="col-12 text-center text-white">
-                              <button onClick={Order}>Pesan Bus</button>
-                            </div>
-                          ) : (
-                            // {/* </Link> */}
-                            <Link to={"/registrasi"}>
-                              <div className="col-12">Pesan Sekarang</div>
-                            </Link>
-                          )}
+                    <div className="col-12 ketentuan">
+                      <i>{<Danger />}</i>
+                      <p>Syarat & Ketentuan Pesan Bus</p>
+                      <br />
+                    </div>
+                    <div className="syarat">
+                      <ol>
+                        <li>
+                          Pembatalan Reservasi dan Penjadwalan Ulang dapat
+                          dilakukan dengan menghubungi via Whatsapp ataupun di
+                          halaman pemesanan 7x24 jam sebelum hari keberangkatan.
+                        </li>
+                        <li>
+                          Uang Muka yang harus dibayar saat pemesanan ialah sebesar 40%
+                          dari total biaya. Selambat-lambatnya harus dibayar
+                          selama 3x24 jam. Jika tidak segera dilakukan pelunasan
+                          maka jadwal tersebut akan dibatalkan.
+                        </li>
+                        <li>
+                          Jika melakukan pembatalan pesanan, 3x24jam sebelum
+                          tanggal berangkat maka akan dikenakan CHARGE yaitu
+                          uang akan dikembalikan 50% (Uang Muka){" "}
+                        </li>
+                      </ol>
+                    </div>
+
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="container ">
+                          <div className=" pesanModal">
+                            {user ? (
+                              // <Link to={"/registrasi"}>
+
+                              <button type="submit" className="col-12">
+                                Pesan Bus
+                              </button>
+                            ) : (
+                              // {/* </Link> */}
+                              <Link to={"/login"}>
+                                <div className="col-12 text-center text-white text-decoration-none">Pesan Sekarang</div>
+                              </Link>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
           </>

@@ -21,7 +21,9 @@ function LOGIN() {
       });
       if (data.role === "User") {
         setUser(data);
-        toast.success("Login Berhasil");
+        toast.success("Login Berhasil", {
+          duration: 1000,
+        });
         navigate("/");
       } else {
         toast.error("Login Gagal");

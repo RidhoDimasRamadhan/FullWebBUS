@@ -210,6 +210,13 @@ app.post("/pesan_bus", async (req, res) => {
     .then((result) => res.send(result))
     .catch((err) => console.log(err));
 });
+// delete pesanan
+app.delete("/delete_pesanan/:id", (req, res) => {
+  const id = req.params.id;
+  Pesanan.findByIdAndDelete({ _id: id })
+    .then((users) => res.json(users))
+    .catch((err) => res.json(err));
+});
 
 // Context Admin
 app.get("/admin/", (req, res) => {

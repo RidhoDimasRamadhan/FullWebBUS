@@ -16,3 +16,4 @@ const userScheemaa = new mongoose.Schema({
 const adminLogin = mongoose.model("admin", userScheemaa);
 
 module.exports = adminLogin;
+  

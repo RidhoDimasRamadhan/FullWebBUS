@@ -212,12 +212,17 @@ const Create = () => {
               <option value="Tidak">Tidak</option>
             </select>
           </div>
-
+          <button className="btn btn-danger me-2">
+            <Link
+              to={"/admin/armada"}
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Cancel
+            </Link>
+          </button>
           <button className="btn btn-success"> Submit</button>
         </form>
       </div>
-      <Link to={"/admin/armada"}>back</Link>
-      {/* <button>back</button> */}
     </>
   );
 };

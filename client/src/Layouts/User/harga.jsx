@@ -107,6 +107,70 @@ function Harga() {
               </td>
               <td>Rp. 3.100.000</td>
             </tr>
+            <tr className="table-dark">
+              <td scope="row" className="RataKiri">
+                Puncak, Cipanas, Sukabumi, Anyer, Mega Mendung, Pantai Cerita (2
+                hari)
+              </td>
+              <td>Rp. 4.500.000</td>
+            </tr>
+            <tr className="table-white">
+              <td scope="row" className="RataKiri">
+                Bandung, Lembang, Ciater, Tangkuban Perahu, Pelabuhan Ratu,
+                Citarik, Cicatih, Ujung Genteng, Tanjung Lesung, Pulau Umang (2
+                hari)
+              </td>
+              <td>Rp. 5.400.000</td>
+            </tr>
+            <tr className="table-dark">
+              <td scope="row" className="RataKiri">
+                Situ Patenggang, Pengalengan, Kawah Putih, Cirebon, Kuningan,
+                Garut, Ciamis, Cibulan, Sumedang (2 hari)
+              </td>
+              <td>Rp. 6.000.000</td>
+            </tr>
+            <tr className="table-white">
+              <td scope="row" className="RataKiri">
+                Pangandaran, Lampung (3 hari)
+              </td>
+              <td>Rp. 8.100.000</td>
+            </tr>
+            <tr className="table-dark">
+              <td scope="row" className="RataKiri">
+                Jawa Tengah (drop) (3 hari)
+              </td>
+              <td>Rp. 8.910.000</td>
+            </tr>
+            <tr className="table-white">
+              <td scope="row" className="RataKiri">
+                Jawa Tengah (4 hari)
+              </td>
+              <td>Rp. 10.800.000</td>
+            </tr>
+            <tr className="table-dark">
+              <td scope="row" className="RataKiri">
+                Jawa Timur (drop) (5 hari)
+              </td>
+              <td>Rp. 13.510.000</td>
+            </tr>
+            <tr className="table-white">
+              <td scope="row" className="RataKiri">
+                Jawa Timur (6 hari)
+              </td>
+              <td>Rp. 16.200.000</td>
+            </tr>
+            <tr className="table-dark">
+              <td scope="row" className="RataKiri">
+                Jawa-Bali (8 hari)
+              </td>
+              <td>Rp. 21.600.000</td>
+            </tr>
+            <tr className="table-white">
+              <td scope="row" className="RataKiri">
+                Jawa-Bali-Lombok (10 hari)
+              </td>
+              <td>Rp. 27.000.000</td>
+            </tr>
           </tbody>
         </table>
       </div>
