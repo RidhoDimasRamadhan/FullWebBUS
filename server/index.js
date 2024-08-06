@@ -196,6 +196,7 @@ app.post("/pesan_bus", async (req, res) => {
     armada_id,
     // user_id,
     nomor_telepon,
+    tempat_tujuan,
     tanggal_berangkat,
     tanggal_pulang,
   } = req.body;
@@ -204,6 +205,7 @@ app.post("/pesan_bus", async (req, res) => {
     armada_id,
     user_id: userData.id,
     nomor_telepon,
+    tempat_tujuan,
     tanggal_berangkat,
     tanggal_pulang,
   })

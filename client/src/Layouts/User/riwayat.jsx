@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Whatsapp from "../../Components/buttonWA/Whatsapp";
 import Danger from "../../Components/buttonWA/danger";
 
-
 import "/src/css/booking.css";
 function Riwayat() {
   const navigate = useNavigate();
@@ -64,15 +63,15 @@ function Riwayat() {
           <li>
             Jika Status{" "}
             <span style={{ fontWeight: "bolder", color: "green" }}>
-              " Confirmed "
-            </span>
+              " KONFIRMASI "
+            </span>{" "}
             tidak bisa melakukan pembatalan pesanan.
           </li>
           <li>
             Jika Status{" "}
             <span style={{ fontWeight: "bolder", color: "red" }}>
-              " Not Confirmed "
-            </span>
+              " BELUM DI KONFIRMASI "
+            </span>{" "}
             bisa melakukan pembatalan pesanan.
           </li>
           <li>
@@ -81,9 +80,10 @@ function Riwayat() {
               Status :
             </span>{" "}
             <span style={{ fontWeight: "bolder", color: "green" }}>
-              " Confirmed " </span>
-             atau 3x24jam sebelum tanggal berangkat maka akan dikenakan CHARGE yaitu
-            uang akan dikembalikan 50% (Uang Muka){" "}
+              " KONFIRMASI "{" "}
+            </span>
+            atau 3x24jam sebelum tanggal berangkat maka akan dikenakan CHARGE
+            yaitu uang akan dikembalikan 50% (Uang Muka){" "}
           </li>
         </ol>
       </div>
@@ -94,7 +94,7 @@ function Riwayat() {
               <div className="kiri">
                 <img
                   src={data.armada_id.gambar_bis}
-                  style={{ width: "300px", height: "300px" }}
+                  style={{ width: "350px", height: "320px" }}
                   alt=""
                 />
               </div>
@@ -103,13 +103,34 @@ function Riwayat() {
                   <h6>
                     <span style={{ fontWeight: "bolder" }}> Nama Bus :</span>{" "}
                     {data.armada_id.nama_bis}
+                    <br />
                   </h6>
+
                   <h6>
                     <span style={{ fontWeight: "bolder" }}>
                       {" "}
                       Nama Pemesan :
                     </span>{" "}
                     {data.user_id.username}
+                    <br />
+                  </h6>
+
+                  <h6>
+                    <span style={{ fontWeight: "bolder" }}>
+                      {" "}
+                      Nomor Pemesan :
+                    </span>{" "}
+                    {data.nomor_telepon}
+                    <br />
+                  </h6>
+
+                  <h6>
+                    <span style={{ fontWeight: "bolder" }}>
+                      {" "}
+                      Tempat Tujuan :
+                    </span>{" "}
+                    {data.tempat_tujuan}
+                    <br />
                   </h6>
 
                   <h6>
@@ -118,21 +139,27 @@ function Riwayat() {
                       Tanggal Pesan :
                     </span>{" "}
                     {data.tanggal_pesan}
+                    <br />
                   </h6>
+
                   <h6>
                     <span style={{ fontWeight: "bolder" }}>
                       {" "}
                       Tanggal Berangkat :
                     </span>{" "}
                     {data.tanggal_berangkat}
+                    <br />
                   </h6>
+
                   <h6>
                     <span style={{ fontWeight: "bolder" }}>
                       {" "}
                       Tanggal Selesai :
                     </span>{" "}
                     {data.tanggal_berangkat}
+                    <br />
                   </h6>
+
                   <h6>
                     <span style={{ fontWeight: "bolder" }}> Status : </span>
                     {data.order === "true" ? (
@@ -143,7 +170,8 @@ function Riwayat() {
                           display: "inline",
                         }}
                       >
-                        CONFIRMED
+                        KONFIRMASI
+                        <br />
                       </h6>
                     ) : (
                       <h6
@@ -154,12 +182,16 @@ function Riwayat() {
                         }}
                       >
                         {" "}
-                        NOT CONFIRMED
+                        BELUM DI KONFIRMASI
+                        <br />
                       </h6>
                     )}
+
+                    <br />
                     <br />
                   </h6>
-                  <div className="batal">
+
+                  <div className="batal" style={{ marginTop: "-2.5rem" }}>
                     {data.order === "true" ? (
                       ""
                     ) : (

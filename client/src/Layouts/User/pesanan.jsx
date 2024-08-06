@@ -22,6 +22,7 @@ const Modal = ({ activeModal, closeModal, data }) => {
 
   const navigate = useNavigate();
   const [nomor_telepon, setNomor_telepon] = useState();
+  const [tempat_tujuan, setTempat_tujuan] = useState();
   const [tanggal_mulai, setTanggal_mulai] = useState();
   const [tanggal_selesai, setTanggal_selesai] = useState();
   // const [nama, setNama] = useState();
@@ -33,19 +34,44 @@ const Modal = ({ activeModal, closeModal, data }) => {
   //     setNama(user.username);
   //   }
   // }, [user]);
-  async function Order() {
-    const response = await axios.post("http://localhost:2000/pesan_bus", {
-      armada_id: data._id,
-      nomor_telepon: nomor_telepon,
-      tanggal_berangkat: tanggal_mulai,
-      tanggal_pulang: tanggal_selesai,
-    });
-    const bookingId = response.data._id;
-    toast.success("Armada Bus Berhasil Dipesan", {
-      duration: 2000,
-    });
-    navigate(`/hasil_order/${bookingId}`);
+
+  async function Order(e) {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:2000/pesan_bus", {
+        armada_id: data._id,
+        nomor_telepon: nomor_telepon,
+        tempat_tujuan: tempat_tujuan,
+        tanggal_berangkat: tanggal_mulai,
+        tanggal_pulang: tanggal_selesai,
+      });
+      const bookingId = response.data._id;
+      toast.success("Armada Bus Berhasil Dipesan", {
+        duration: 2000,
+      });
+      navigate(`/hasil_order/${bookingId}`);
+      //   setUser(data);
+      //   toast.success("Login Berhasil");
+      //   navigate("/");
+    } catch (error) {
+      toast.error("Login Gagal");
+      //   alert("Login Gagal");
+    }
   }
+
+  // async function Order() {
+  //   const response = await axios.post("http://localhost:2000/pesan_bus", {
+  //     armada_id: data._id,
+  //     nomor_telepon: nomor_telepon,
+  //     tanggal_berangkat: tanggal_mulai,
+  //     tanggal_pulang: tanggal_selesai,
+  //   });
+  //   const bookingId = response.data._id;
+  //   toast.success("Armada Bus Berhasil Dipesan", {
+  //     duration: 2000,
+  //   });
+  //   navigate(`/hasil_order/${bookingId}`);
+  // }
 
   return (
     <div className="modal-backdrop" onClick={closeModal}>
@@ -192,34 +218,55 @@ const Modal = ({ activeModal, closeModal, data }) => {
                         required
                       />
                     </div>
-                    <div className="col-12">
-                      <label htmlFor="" className="Label">
-                        TanggaL Mulai Perjalanan
+                    <div className="col-12" style={{ marginTop: "-10px" }}>
+                      <label htmlFor="" className="Label ">
+                        Tempat Tujuan
                       </label>{" "}
                       <br />
                       <input
-                        type="date"
+                        type="text"
+                        value={tempat_tujuan}
+                        onChange={(e) => setTempat_tujuan(e.target.value)}
+                        placeholder="Masukkan tempat tujuan"
                         className="form-control"
-                        value={tanggal_mulai}
-                        onChange={(e) => setTanggal_mulai(e.target.value)}
                         required
                       />
                     </div>
-                    <div className="col-12">
-                      <label htmlFor="" className="Label">
-                        TanggaL Akhir Perjalanan
-                      </label>{" "}
-                      <br />
-                      <input
-                        type="date"
-                        className="form-control"
-                        value={tanggal_selesai}
-                        onChange={(e) => setTanggal_selesai(e.target.value)}
-                        required
-                      />
+                    <div className="col-12" style={{ marginTop: "-10px" }}>
+                      <div className="row">
+                        <div className="col-6">
+                          <label htmlFor="" className="Label">
+                            TanggaL Mulai Perjalanan
+                          </label>{" "}
+                          <br />
+                          <input
+                            type="date"
+                            className="form-control"
+                            value={tanggal_mulai}
+                            onChange={(e) => setTanggal_mulai(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="col-6">
+                          <label htmlFor="" className="Label">
+                            TanggaL Akhir Perjalanan
+                          </label>{" "}
+                          <br />
+                          <input
+                            type="date"
+                            className="form-control"
+                            value={tanggal_selesai}
+                            onChange={(e) => setTanggal_selesai(e.target.value)}
+                            required
+                          />
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="col-12 ketentuan">
+                    <div
+                      className="col-12 ketentuan"
+                      style={{ marginTop: "-10px" }}
+                    >
                       <i>{<Danger />}</i>
                       <p>Syarat & Ketentuan Pesan Bus</p>
                       <br />
@@ -232,10 +279,10 @@ const Modal = ({ activeModal, closeModal, data }) => {
                           halaman pemesanan 7x24 jam sebelum hari keberangkatan.
                         </li>
                         <li>
-                          Uang Muka yang harus dibayar saat pemesanan ialah sebesar 40%
-                          dari total biaya. Selambat-lambatnya harus dibayar
-                          selama 3x24 jam. Jika tidak segera dilakukan pelunasan
-                          maka jadwal tersebut akan dibatalkan.
+                          Uang Muka yang harus dibayar saat pemesanan ialah
+                          sebesar 40% dari total biaya. Selambat-lambatnya harus
+                          dibayar selama 3x24 jam. Jika tidak segera dilakukan
+                          pelunasan maka jadwal tersebut akan dibatalkan.
                         </li>
                         <li>
                           Jika melakukan pembatalan pesanan, 3x24jam sebelum
@@ -257,8 +304,15 @@ const Modal = ({ activeModal, closeModal, data }) => {
                               </button>
                             ) : (
                               // {/* </Link> */}
-                              <Link to={"/login"}>
-                                <div className="col-12 text-center text-white text-decoration-none">Pesan Sekarang</div>
+                              <Link
+                                to={"/login"}
+                                className="text-decoration-none"
+                              >
+                                <div className="col-12 text-center text-white">
+                                  <span className="text-decoration-none">
+                                    Pesan Sekarang
+                                  </span>
+                                </div>
                               </Link>
                             )}
                           </div>

@@ -178,12 +178,15 @@ function Harga() {
       <div className="container alert">
         <div className="col-12">
           <div className="row">
-            <div className="col-1">
+            <div className="col-1 mt-2">
               <i>{<Danger />}</i>
             </div>
             <div className="col-11 danger">
               Daftar harga sewa bus sewaktu-waktu dapat berubah, hubungi kami
               untuk bernegosiasi dan detail harganya.
+              <br />
+              Harga yang tertera pada tabel atas tidak termasuk uang makan dan
+              uang tol.
             </div>
           </div>
         </div>
