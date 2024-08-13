@@ -5,6 +5,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv").config();
 
 // const dotenv = require("dotenv");
 const path = require("path");
@@ -28,10 +29,13 @@ const Pesanan = require("./models/pesanan");
 // admin
 const Admin = require("./models/admin");
 
-mongoose.connect("mongodb://localhost:27017/Skripsi");
+// pesan
+const Pesan = require("./models/pesan");
+// mongoose.connect("mongodb://localhost:27017/Skripsi");
+mongoose.connect(process.env.MONGO_URL);
 
 const UserBcrypt = bcrypt.genSaltSync(10);
-const secret = "sfsdfs31313hsdsjdsdj121";
+const secret = process.env.Key_Secret;
 
 const app = express();
 
@@ -212,6 +216,42 @@ app.post("/pesan_bus", async (req, res) => {
     .then((result) => res.send(result))
     .catch((err) => console.log(err));
 });
+
+//Halaman Kontak
+app.post("/pesan_user", async (req, res) => {
+  const userData = await getUserDataFromUser(req);
+  const {
+    nama_lengkap,
+    email,
+    kategori,
+    no_telepon,
+    pesan,
+    dibaca,
+    tanggal_kirim,
+  } = req.body;
+  Pesan.create({
+    user_id: userData.id,
+    nama_lengkap,
+    email,
+    kategori,
+    no_telepon,
+    pesan,
+    dibaca,
+    tanggal_kirim,
+  })
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
+// Get Halaman Kontak
+app.get("/kontak", (req, res) => {
+  Pesan.find({})
+    .populate("user_id")
+    .then((result) => res.send(result));
+});
+
+// Edit Kontak
+
 // delete pesanan
 app.delete("/delete_pesanan/:id", (req, res) => {
   const id = req.params.id;

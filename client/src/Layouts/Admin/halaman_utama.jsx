@@ -63,6 +63,11 @@ function halaman_admin() {
               <span className="fs-5 ms-2 ">Armada</span>
             </i>
           </NavLink>
+          <NavLink to="/admin/pesan" className="nav-link text-white">
+            <i className="fs-5 ">
+              <span className="fs-5 ms-2 ">Pesan</span>
+            </i>
+          </NavLink>
         </ul>
         <hr className="text-secondary" />
         <button type="button" className="btn btn-danger" onClick={logout}>

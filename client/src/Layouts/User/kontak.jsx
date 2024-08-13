@@ -3,7 +3,40 @@ import "/src/css/kontak.css";
 import Footer from "/src/Components/footer/footerLayout.jsx";
 import Whatsapp from "../../Components/buttonWA/Whatsapp";
 import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+
+import { Context } from "/src/userContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 function Kontak() {
+  const { user } = useContext(Context);
+  const navigate = useNavigate();
+
+  const [nama_lengkap, setnama_lengkap] = useState();
+  const [email, setEmail] = useState();
+  const [kategori, setkategori] = useState();
+  const [no_telepon, setno_telepon] = useState();
+  const [pesan, setpesan] = useState();
+
+  async function Order(e) {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:2000/pesan_user", {
+        nama_lengkap: nama_lengkap,
+        email: email,
+        kategori: kategori,
+        no_telepon: no_telepon,
+        pesan: pesan,
+      });
+      toast.success("Pesan Berhasil Terkirim, TerimaKasih !!", {
+        duration: 2000,
+      });
+      navigate(`/kontak`);
+    } catch (error) {
+      toast.error("Pesan Gagal !!");
+    }
+  }
   return (
     <>
       <Whatsapp />
@@ -23,7 +56,7 @@ function Kontak() {
             <form
               className="row g-3"
               action="https://formsubmit.co/your@email.com"
-              method="POST"
+              onSubmit={Order}
             >
               <div className="col-xl-5 col-md-6 col-lg-6">
                 <label className="form-label">
@@ -33,9 +66,9 @@ function Kontak() {
                   type="text"
                   name="Fullname"
                   className="form-control"
-                  id="inputEmail4"
                   placeholder="Masukan Nama Lengkap"
                   required
+                  onChange={(e) => setnama_lengkap(e.target.value)}
                 />
               </div>
               <div className="col-xl-5 col-md-6 col-lg-6">
@@ -46,16 +79,44 @@ function Kontak() {
                   type="text"
                   className="form-control"
                   name="Email"
-                  id="inputPassword4"
                   placeholder="Masukan email anda"
                   required
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="col-xl-5 col-md-6 col-lg-6">
-                <label className="form-label">Kategori</label>
-                <select id="inputState" className="form-select" name="Category">
-                  <option selected>Pilih Kategori</option>
-                  <option>...</option>
+                <label className="form-label">Jenis Bus</label>
+                <select
+                  id="inputState"
+                  className="form-select"
+                  name="Category"
+                  onChange={(e) => setkategori(e.target.value)}
+                >
+                  <option selected>Pilihan Bus</option>
+                  <option value="NARADATRANS MUSTANG KUNING">
+                    NARADATRANS MUSTANG KUNING
+                  </option>
+                  <option value="NARADATRANS PARIWISATA BIRU-PUTIH">
+                    NARADATRANS PARIWISATA BIRU-PUTIH
+                  </option>
+                  <option value="NARADATRANS MUHAASABAH VOYAGER HIJAU">
+                    NARADATRANS MUHAASABAH VOYAGER HIJAU
+                  </option>
+                  <option value="NARADATRANS VELOCISTA BLUE">
+                    NARADATRANS VELOCISTA BLUE
+                  </option>
+                  <option value="NARADATRANS MUHAASABAH VOYAGER HIJAU-SILVER">
+                    NARADATRANS MUHAASABAH VOYAGER HIJAU-SILVER
+                  </option>
+                  <option value="NARADATRANS MUHAASABAH SILVER">
+                    NARADATRANS MUHAASABAH SILVER
+                  </option>
+                  <option
+                    value="NARADATRANS MUSTANG
+"
+                  >
+                    NARADATRANS MUSTANG
+                  </option>
                 </select>
               </div>
               <div className="col-xl-5 col-md-6 col-lg-6">
@@ -63,18 +124,15 @@ function Kontak() {
                   No. Telepon <label className="star">*</label>
                 </label>
                 <div className="input-group">
-                  <span className="input-group-text" id="basic-addon1">
-                    +62
-                  </span>
+                  <span className="input-group-text basic-addon1">+62</span>
                   <input
                     type="text"
                     className="form-control"
-                    name="Phone"
-                    id="inputPassword4"
                     placeholder="Masukan nomor telepon"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     required
+                    onChange={(e) => setno_telepon(e.target.value)}
                   />
                 </div>
               </div>
@@ -86,16 +144,23 @@ function Kontak() {
                   className="form-control"
                   name="Message"
                   aria-label="With textarea"
-                  placeholder="Masukan Nama Lengkap"
+                  placeholder="Masukan pesan - pesan berupa kritik maupun saran untuk NaradaTrans . . . . . . "
+                  onChange={(e) => setpesan(e.target.value)}
                 ></textarea>
               </div>
               <div className="col-10 bot-content mb-5">
                 <h4 className="text-brown">* Wajib diisi</h4>
-                <Link to={"/login"}>
+                {user ? (
                   <button type="submit" className="btn btn-primary btn-kirim">
                     Kirim Pesan
                   </button>
-                </Link>
+                ) : (
+                  <Link to={"/login"}>
+                    <button type="submit" className="btn btn-primary btn-kirim">
+                      Kirim Pesan
+                    </button>
+                  </Link>
+                )}
               </div>
               <div className="col-12"></div>
             </form>

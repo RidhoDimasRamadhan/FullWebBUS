@@ -21,6 +21,7 @@ import Create_armada from "/src/Layouts/Admin/CRUD/Create_armada.jsx";
 import EditArmada from "/src/Layouts/Admin/CRUD/Edit_Armada.jsx";
 import EditOrder from "/src/Layouts/Admin/CRUD/edit_order.jsx";
 
+import Pesan from "/src/Layouts/Admin/pesan.jsx";
 const router_admin = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/admin/" element={<RootAdmin />}>
@@ -30,6 +31,7 @@ const router_admin = createBrowserRouter(
       <Route path="galeri_admin" element={<Galeri />} />
       <Route path="pemesanan" element={<Pemesanan />} />
       <Route path="armada" element={<Armada />} />
+      <Route path="pesan" element={<Pesan />} />
       <Route path="create_armada" element={<Create_armada />} />
       <Route path="update_armada/:id" element={<EditArmada />} />
       <Route path="update_order/:id" element={<EditOrder />} />
